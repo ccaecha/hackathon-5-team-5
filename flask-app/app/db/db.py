@@ -1,3 +1,5 @@
+from datetime import datetime
+
 class MockDatabase:
     _data = {}
 
@@ -46,3 +48,14 @@ class MockDatabase:
 # To delete records that match a condition:
 # deleted_count = MockDatabase.delete("test_table", lambda x: x["id"] == 1)
 #
+# Table structure:
+# event_table = {
+#     "id": int,
+#     "event_title": str,
+#     "event_description": str,
+#     "start_time": datetime,
+#     "end_time": datetime,
+#     "event_location": str,
+#     "event_description": str,
+#     "event_additional_notes": str,
+#     }

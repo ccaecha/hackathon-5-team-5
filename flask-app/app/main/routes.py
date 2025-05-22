@@ -19,6 +19,9 @@ def get_data():
 def dashboard():
     return render_template("main/dashboard.html")
 
+@main.route("/time-slot")
+def time_slot():
+    return render_template("main/time_slot.html")
 
 @main.route("/db-test")
 def db_test():
