@@ -11,7 +11,7 @@
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 
     <!-- Your custom CSS (optional) -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 
     <!-- Additional head content -->
     {% block head %}{% endblock %}
@@ -49,7 +49,7 @@
     {% endblock %}
 
     <!-- Your custom JS -->
-    <script src="{{ url_for('static', filename='script.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 
     <!-- Additional scripts -->
     {% block scripts %}{% endblock %}
