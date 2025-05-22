@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Flask App{% endblock %}</title>
+
+    <!-- DaisyUI and Tailwind CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+    <!-- Your custom CSS (optional) -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+
+    <!-- Additional head content -->
+    {% block head %}{% endblock %}
+</head>
+
+<body>
+    <!-- Navigation (optional) -->
+    {% block navbar %}
+    <div class="navbar bg-base-100">
+        <div class="flex-1">
+            <a class="btn btn-ghost text-xl">Flask App</a>
+        </div>
+        <div class="flex-none">
+            <ul class="menu menu-horizontal px-1">
+                <li><a href="/">Home</a></li>
+                <li><a href="/about">About</a></li>
+            </ul>
+        </div>
+    </div>
+    {% endblock %}
+
+    <!-- Main content area -->
+    <main class="container mx-auto px-4 py-8">
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Footer (optional) -->
+    {% block footer %}
+    <footer class="footer footer-center p-4 bg-base-300 text-base-content">
+        <div>
+            <p>Copyright © 2024 - All rights reserved</p>
+        </div>
+    </footer>
+    {% endblock %}
+
+    <!-- Your custom JS -->
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+
+    <!-- Additional scripts -->
+    {% block scripts %}{% endblock %}
+</body>
+
+</html>
