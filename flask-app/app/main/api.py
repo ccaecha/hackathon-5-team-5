@@ -1,4 +1,8 @@
+<<<<<<< HEAD
+from flask import Blueprint, render_template, session, request, redirect, url_for
+=======
 from flask import Blueprint, render_template, session, request
+>>>>>>> 592eef0dab3807cd050356bc68d51b4cb24bb1b6
 from flask import jsonify
 from ..db.db import MockDatabase
 
@@ -22,6 +26,22 @@ def get_event(id):
         return jsonify({"status": "error", "message": "Event not found"}), 404
     return jsonify({"status": "success", "data": data[0] if data else None})
 
+
+@blueprint.route("/event", methods=["POST"])
+def insert_event():
+    record = {
+        "user_id": request.form.get("user_id"),
+        "event_title": request.form.get("event_title"),
+        "event_description": request.form.get("event_description"),
+        "start_time": request.form.get("start_time"),
+        "end_time": request.form.get("end_time"),
+        "event_location": request.form.get("event_location"),
+        "event_additional_notes": request.form.get("event_additional_notes"),
+        "accepted": False,
+    }
+    MockDatabase.insert("event", record)
+    print(record)
+    return redirect(url_for("dashboard"))
 
 @blueprint.route("/event", methods=["GET"])
 def get_all_events():
@@ -88,7 +108,7 @@ def insert_user():
         return jsonify({"status": "error", "message": str(e)}), 400
 
 
-@blueprint.route("/user", methods=["PUT"])
+@blueprint.route("/user/<id>", methods=["PUT"])
 def update_user(id):
     record = request.get_json()
     updated_count = MockDatabase.update(
@@ -139,7 +159,7 @@ def insert_calendar():
         return jsonify({"status": "error", "message": str(e)}), 400
 
 
-@blueprint.route("/calendar", methods=["PUT"])
+@blueprint.route("/calendar/<id>", methods=["PUT"])
 def update_calendar(id):
     record = request.get_json()
     updated_count = MockDatabase.update(
