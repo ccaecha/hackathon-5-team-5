@@ -31,7 +31,7 @@
                 <li><a href="/dashboard">Dashboard</a></li>
                 <li tabindex="0" class="dropdown dropdown-end">
                     <details>
-                        <summary>Test Users</summary>
+                        <summary>{{ session['user'] if session.get('user') else 'Test Users' }}</summary>
                         <ul class="p-2 bg-base-200 rounded-box w-52 right-0 absolute">
                             <li><a href="{{ url_for('main.set_user', username='Alice') }}">Alice</a></li>
                             <li><a href="{{ url_for('main.set_user', username='Bob') }}">Bob</a></li>

@@ -57,9 +57,7 @@ def dashboard():
     slots = filtered_slots
     # In production, you would fetch from the database:
     # slots = MockDatabase.get_all("slots")
-    return render_template(
-        "main/dashboard.html", slots=slots, current_user=current_user
-    )
+    return render_template("main/dashboard.html", slots=slots)
 
 @main.route("/time-slot")
 def time_slot():
