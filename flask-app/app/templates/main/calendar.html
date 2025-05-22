@@ -1,12 +1,15 @@
+
 {% extends "main/base.html" %}
 
 {% block title %}Main Index{% endblock %}
 
 {% block content %}
-<div class="hero min-h-screen bg-base-200">
-    <ol>
+<h1 class="text-4xl font-bold mb-6 text-center">Your Time Slots</h1>
+<div class=" min-h-screen bg-base-200">
+    <div id="card-list" class="card-list-container">
+        
         <div class="card">
-            <p>Time Slot</p>
+            <p>Time Slot:</p>
             <p>Location</p>
             <p>Task Description</p>
         </div>
@@ -16,5 +19,32 @@
             <p>Task Description</p>
         </div>
     </ol> 
+    
 </div>
+<script>
+    const testitems=[{"time":"2:00 - 3:00", "location":"park", "taskDescription":"walking the dog" }, {"time":"12:00 - 1:00", "location":"café", "taskDescription":"tutor maths" }]
+    
+    testitems.forEach(item => {
+        const testlist = document.getElementById("card-list")
+        const card = document.createElement('div')
+        card.setAttribute('class', 'card')
+
+        const timeslot = document.createElement('h3')
+        timeslot.textContent="Time Slot: " + item.time
+    
+        const location = document.createElement('p')
+        location.textContent = "Location: " + item.location
+
+        const task = document.createElement('p')
+        task.textContent = "Task: " + item.taskDescription
+
+        card.appendChild(timeslot)
+        card.appendChild(location)
+        card.appendChild(task)
+        testlist.appendChild(card)
+
+    });
+        
+    
+</script>
 {% endblock %}
