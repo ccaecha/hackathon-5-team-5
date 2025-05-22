@@ -7,8 +7,9 @@
 <h1 class="text-4xl font-bold mb-6 text-center">Your Time Slots</h1>
 <div class=" min-h-screen bg-base-200">
     <div id="card-list" class="card-list-container">
+        
         <div class="card">
-            <p>Time Slot</p>
+            <p>Time Slot:</p>
             <p>Location</p>
             <p>Task Description</p>
         </div>
@@ -29,13 +30,13 @@
         card.setAttribute('class', 'card')
 
         const timeslot = document.createElement('h3')
-        timeslot.textContent=item.time
+        timeslot.textContent="Time Slot: " + item.time
     
         const location = document.createElement('p')
-        location.textContent = item.location
+        location.textContent = "Location: " + item.location
 
         const task = document.createElement('p')
-        task.textContent = item.taskDescription
+        task.textContent = "Task: " + item.taskDescription
 
         card.appendChild(timeslot)
         card.appendChild(location)

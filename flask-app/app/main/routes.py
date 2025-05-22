@@ -63,7 +63,10 @@ def dashboard():
     # Attach user info to each event
     enriched_events = []
     for event in events:
-        if event["user_id"] != current_user_id:
+        accepted_by = event.get("accepted_by")
+        if event["user_id"] != current_user_id and (
+            accepted_by is None or accepted_by == current_user_id
+        ):
             user = user_map.get(event["user_id"], {})
             username = user.get("username", random.choice(RANDOM_NAMES))
             email = user.get("email", f"{username.lower()}@example.com")
