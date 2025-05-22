@@ -1,6 +1,7 @@
 from flask import Blueprint, render_template, session, request, redirect, url_for
 from flask import jsonify
 from ..db.db import MockDatabase
+from datetime import datetime
 
 blueprint = Blueprint("backend", __name__)
 
@@ -25,12 +26,20 @@ def get_event(id):
 
 @blueprint.route("/event", methods=["POST"])
 def insert_event():
+    start_time = request.form.get("start_time")
+    start_date = request.form.get("start_date")
+    datetime_str = f"{start_date} {start_time}"
+    start_dt = datetime.strptime(datetime_str, "%d/%m/%Y %H:%M")
+    end_time = request.form.get("end_time")
+    end_date = request.form.get("end_date")
+    datetime_str = f"{end_date} {end_time}"
+    end_dt = datetime.strptime(datetime_str, "%d/%m/%Y %H:%M")
     record = {
         "user_id": request.form.get("user_id"),
         "event_title": request.form.get("event_title"),
         "event_description": request.form.get("event_description"),
-        "start_time": request.form.get("start_time"),
-        "end_time": request.form.get("end_time"),
+        "start_time": start_dt,
+        "end_time": end_dt,
         "event_location": request.form.get("event_location"),
         "event_additional_notes": request.form.get("event_additional_notes"),
         "accepted": False,
