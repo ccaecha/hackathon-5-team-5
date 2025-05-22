@@ -7,9 +7,13 @@ class MockDatabase:
     def insert(cls, table, record, use_auto_id=True):
         if table not in cls._data:
             cls._data[table] = []
-        if use_auto_id:
+        if use_auto_id or "id" not in record:
             if isinstance(record, dict):
                 record["id"] = len(cls._data[table]) + 1
+        elif "id" in record:
+            existing_ids = {r["id"] for r in cls._data[table]}
+            if record["id"] in existing_ids:
+                raise ValueError(f"ID {record['id']} already exists in table {table}")
         cls._data[table].append(record)
 
     @classmethod
