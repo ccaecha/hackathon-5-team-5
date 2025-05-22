@@ -9,34 +9,54 @@
         <table class="table table-zebra w-full">
             <thead>
                 <tr>
+                    <th></th>
                     <th>User</th>
+                    <th>Email</th>
+                    <th>Event</th>
+                    <th>Description</th>
                     <th>Time Slot</th>
                     <th>Location</th>
-                    <th>Task Description</th>
+                    <th>Notes</th>
+                    <th>Status</th>
                     <th>Action</th>
                 </tr>
             </thead>
             <tbody>
-                {% for slot in slots %}
+                {% for event in events %}
                 <tr>
                     <td>
-                        <div class="flex items-center gap-3">
-                            <div class="avatar">
-                                <div class="w-12 rounded-full">
-                                    <img src="{{ slot.avatar_url }}" alt="{{ slot.user_name }}" />
-                                </div>
-                            </div>
-                            <div>
-                                <div class="font-bold">{{ slot.user_name }}</div>
-                                <div class="text-sm opacity-50">{{ slot.email }}</div>
+                        <div class="avatar">
+                            <div class="w-12 rounded-full">
+                                <img src="{{ event.avatar_url }}" alt="{{ event.username }}">
                             </div>
                         </div>
                     </td>
-                    <td>{{ slot.time }}</td>
-                    <td>{{ slot.location }}</td>
-                    <td>{{ slot.task }}</td>
+                    <td>{{ event.username }}</td>
+                    <td>{{ event.email }}</td>
+
                     <td>
+                        <div class="font-bold">{{ event.event_title }}</div>
+                    </td>
+                    <td>{{ event.event_description }}</td>
+                    <td>
+                        {{ event.start_time.strftime('%Y-%m-%d %H:%M') }} -
+                        {{ event.end_time.strftime('%Y-%m-%d %H:%M') }}
+                    </td>
+                    <td>{{ event.event_location }}</td>
+                    <td>{{ event.event_additional_notes }}</td>
+                    <td>
+                        {% if event.accepted %}
+                        <span class="badge badge-success">Accepted</span>
+                        {% else %}
+                        <span class="badge badge-ghost">Open</span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if not event.accepted %}
                         <button class="btn btn-success btn-sm">Accept</button>
+                        {% else %}
+                        <button class="btn btn-disabled btn-sm" disabled>Accepted</button>
+                        {% endif %}
                     </td>
                 </tr>
                 {% endfor %}
