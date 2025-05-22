@@ -1,8 +1,9 @@
-from flask import Blueprint, render_template
+from flask import Blueprint, render_template, session
 from flask import jsonify
 from ..db.db import MockDatabase
 
 blueprint = Blueprint("backend", __name__)
+
 
 @blueprint.route("/get-data", methods=["GET"])
 def get_data(table, id):
