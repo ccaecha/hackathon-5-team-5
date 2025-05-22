@@ -51,6 +51,7 @@ class MockDatabase:
 # Table structure:
 # event_table = {
 #     "id": int,
+#     "user_id": int,
 #     "event_title": str,
 #     "event_description": str,
 #     "start_time": datetime,
@@ -58,4 +59,5 @@ class MockDatabase:
 #     "event_location": str,
 #     "event_description": str,
 #     "event_additional_notes": str,
+#     "accepted": bool
 #     }
