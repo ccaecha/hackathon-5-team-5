@@ -88,7 +88,7 @@ def insert_user():
         return jsonify({"status": "error", "message": str(e)}), 400
 
 
-@blueprint.route("/user", methods=["PUT"])
+@blueprint.route("/user/<id>", methods=["PUT"])
 def update_user(id):
     record = request.get_json()
     updated_count = MockDatabase.update(
@@ -139,7 +139,7 @@ def insert_calendar():
         return jsonify({"status": "error", "message": str(e)}), 400
 
 
-@blueprint.route("/calendar", methods=["PUT"])
+@blueprint.route("/calendar/<id>", methods=["PUT"])
 def update_calendar(id):
     record = request.get_json()
     updated_count = MockDatabase.update(
