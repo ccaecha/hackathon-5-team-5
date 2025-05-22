@@ -2,9 +2,12 @@ class MockDatabase:
     _data = {}
 
     @classmethod
-    def insert(cls, table, record):
+    def insert(cls, table, record, use_auto_id=True):
         if table not in cls._data:
             cls._data[table] = []
+        if use_auto_id:
+            if isinstance(record, dict):
+                record["id"] = len(cls._data[table]) + 1
         cls._data[table].append(record)
 
     @classmethod
