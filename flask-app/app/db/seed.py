@@ -7,6 +7,7 @@ def insert_fake_events():
         MockDatabase.insert(
             "event",
             {
+                "id": 1,
                 "user_id": 1,
                 "event_title": "Math Tutoring",
                 "event_description": "Help with calculus homework",
@@ -21,6 +22,7 @@ def insert_fake_events():
         MockDatabase.insert(
             "event",
             {
+                "id": 2,
                 "user_id": 2,
                 "event_title": "Dog Walking",
                 "event_description": "Walk my dog in the park",
@@ -35,6 +37,7 @@ def insert_fake_events():
         MockDatabase.insert(
             "event",
             {
+                "id": 3,
                 "user_id": 3,
                 "event_title": "Cat Sitting",
                 "event_description": "Feed and play with my cat",
@@ -49,6 +52,7 @@ def insert_fake_events():
         MockDatabase.insert(
             "event",
             {
+                "id": 4,
                 "user_id": 4,
                 "event_title": "House Cleaning",
                 "event_description": "Deep clean kitchen and living room",
@@ -63,6 +67,7 @@ def insert_fake_events():
         MockDatabase.insert(
             "event",
             {
+                "id": 5,
                 "user_id": 5,
                 "event_title": "Grocery Shopping",
                 "event_description": "Weekly grocery run for elderly neighbor",
@@ -77,6 +82,7 @@ def insert_fake_events():
         MockDatabase.insert(
             "event",
             {
+                "id": 6,
                 "user_id": 6,
                 "event_title": "Furniture Assembly",
                 "event_description": "Help assemble IKEA bookshelf and desk",
@@ -91,6 +97,7 @@ def insert_fake_events():
         MockDatabase.insert(
             "event",
             {
+                "id": 7,
                 "user_id": 7,
                 "event_title": "Language Exchange",
                 "event_description": "Practice Spanish conversation over coffee",
@@ -105,6 +112,7 @@ def insert_fake_events():
         MockDatabase.insert(
             "event",
             {
+                "id": 8,
                 "user_id": 8,
                 "event_title": "Plant Watering",
                 "event_description": "Water indoor plants while I'm on vacation",
@@ -119,6 +127,7 @@ def insert_fake_events():
         MockDatabase.insert(
             "event",
             {
+                "id": 9,
                 "user_id": 9,
                 "event_title": "Computer Setup",
                 "event_description": "Help set up new laptop and transfer files",
@@ -133,6 +142,7 @@ def insert_fake_events():
         MockDatabase.insert(
             "event",
             {
+                "id": 10,
                 "user_id": 10,
                 "event_title": "Moving Help",
                 "event_description": "Help load/unload moving truck",
@@ -147,6 +157,7 @@ def insert_fake_events():
         MockDatabase.insert(
             "event",
             {
+                "id": 11,
                 "user_id": 11,
                 "event_title": "Photography Session",
                 "event_description": "Need photographer for small birthday party",
@@ -161,6 +172,7 @@ def insert_fake_events():
         MockDatabase.insert(
             "event",
             {
+                "id": 12,
                 "user_id": 12,
                 "event_title": "Yard Work",
                 "event_description": "Rake leaves and trim bushes",
@@ -175,6 +187,7 @@ def insert_fake_events():
         MockDatabase.insert(
             "event",
             {
+                "id": 13,
                 "user_id": 13,
                 "event_title": "Baking Help",
                 "event_description": "Help bake cookies for school fundraiser",
@@ -189,6 +202,7 @@ def insert_fake_events():
         MockDatabase.insert(
             "event",
             {
+                "id": 14,
                 "user_id": 14,
                 "event_title": "Airport Pickup",
                 "event_description": "Pick up friend from airport",
@@ -203,6 +217,7 @@ def insert_fake_events():
         MockDatabase.insert(
             "event",
             {
+                "id": 15,
                 "user_id": 15,
                 "event_title": "Study Group",
                 "event_description": "Join chemistry study group before exam",
@@ -217,6 +232,7 @@ def insert_fake_events():
         MockDatabase.insert(
             "event",
             {
+                "id": 16,
                 "user_id": 16,
                 "event_title": "Baby Sitting",
                 "event_description": "Watch 6-year-old for date night",
@@ -231,6 +247,7 @@ def insert_fake_events():
         MockDatabase.insert(
             "event",
             {
+                "id": 17,
                 "user_id": 17,
                 "event_title": "Painting Help",
                 "event_description": "Help paint bedroom walls",
@@ -245,6 +262,7 @@ def insert_fake_events():
         MockDatabase.insert(
             "event",
             {
+                "id": 18,
                 "user_id": 18,
                 "event_title": "Event Setup",
                 "event_description": "Help set up tables and decorations for wedding",
