@@ -4,13 +4,16 @@ from ..db.db import MockDatabase
 
 blueprint = Blueprint("backend", __name__)
 
+
 @blueprint.errorhandler(404)
 def page_not_found(e):
     return jsonify({"status": "error", "message": "Resource not found"}), 404
 
+
 @blueprint.errorhandler(405)
 def method_not_allowed(e):
     return jsonify({"status": "error", "message": "Method not allowed"}), 405
+
 
 @blueprint.route("/event/<id>", methods=["GET"])
 def get_event(id):
@@ -19,10 +22,12 @@ def get_event(id):
         return jsonify({"status": "error", "message": "Event not found"}), 404
     return jsonify({"status": "success", "data": data[0] if data else None})
 
+
 @blueprint.route("/event", methods=["GET"])
 def get_all_events():
     data = MockDatabase.get_all("event")
     return jsonify({"status": "success", "data": data})
+
 
 @blueprint.route("/event", methods=["POST"])
 def insert_event():
@@ -34,7 +39,7 @@ def insert_event():
         return jsonify({"status": "error", "message": str(e)}), 400
 
 
-@blueprint.route("/event", methods=["PUT"])
+@blueprint.route("/event/<id>", methods=["PUT"])
 def update_event(id):
     record = request.get_json()
     updated_count = MockDatabase.update(
@@ -47,6 +52,7 @@ def update_event(id):
         }
     )
 
+
 @blueprint.route("/event", methods=["DELETE"])
 def delete_event(id):
     deleted_count = MockDatabase.delete("event", lambda x: x["id"] == id)
@@ -57,6 +63,7 @@ def delete_event(id):
         }
     )
 
+
 @blueprint.route("/user/<id>", methods=["GET"])
 def get_user(id):
     data = MockDatabase.find("user", lambda x: x["id"] == id)
@@ -64,10 +71,12 @@ def get_user(id):
         return jsonify({"status": "error", "message": "User not found"}), 404
     return jsonify({"status": "success", "data": data[0] if data else None})
 
+
 @blueprint.route("/user", methods=["GET"])
 def get_all_users():
     data = MockDatabase.get_all("user")
     return jsonify({"status": "success", "data": data})
+
 
 @blueprint.route("/user", methods=["POST"])
 def insert_user():
@@ -77,6 +86,7 @@ def insert_user():
         return jsonify({"status": "success", "message": "User inserted successfully"})
     except ValueError as e:
         return jsonify({"status": "error", "message": str(e)}), 400
+
 
 @blueprint.route("/user", methods=["PUT"])
 def update_user(id):
@@ -91,6 +101,7 @@ def update_user(id):
         }
     )
 
+
 @blueprint.route("/user", methods=["DELETE"])
 def delete_user(id):
     deleted_count = MockDatabase.delete("user", lambda x: x["id"] == id)
@@ -101,6 +112,7 @@ def delete_user(id):
         }
     )
 
+
 @blueprint.route("/calendar/<id>", methods=["GET"])
 def get_calendar(id):
     data = MockDatabase.find("calendar", lambda x: x["id"] == id)
@@ -108,19 +120,24 @@ def get_calendar(id):
         return jsonify({"status": "error", "message": "Calendar not found"}), 404
     return jsonify({"status": "success", "data": data[0] if data else None})
 
+
 @blueprint.route("/calendar", methods=["GET"])
 def get_all_calendars():
     data = MockDatabase.get_all("calendar")
     return jsonify({"status": "success", "data": data})
+
 
 @blueprint.route("/calendar", methods=["POST"])
 def insert_calendar():
     record = request.get_json()
     try:
         MockDatabase.insert("calendar", record)
-        return jsonify({"status": "success", "message": "Calendar inserted successfully"})
+        return jsonify(
+            {"status": "success", "message": "Calendar inserted successfully"}
+        )
     except ValueError as e:
         return jsonify({"status": "error", "message": str(e)}), 400
+
 
 @blueprint.route("/calendar", methods=["PUT"])
 def update_calendar(id):
