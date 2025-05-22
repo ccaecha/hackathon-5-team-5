@@ -54,7 +54,7 @@
                     <td>
                         {% if not event.accepted %}
                         <button class="btn btn-success btn-sm accept-btn" data-event-id="{{ event.id }}"
-                            data-user-id="{{ session['user_id'] }}">
+                            data-user-id="{{ session['user_id'] }}" data-send-id="{{ event.user_id }}">
                             Accept
                         </button>
                         {% else %}

@@ -1,5 +1,6 @@
 from datetime import datetime
 
+
 class MockDatabase:
     _data = {}
 
@@ -36,9 +37,11 @@ class MockDatabase:
     @classmethod
     def delete(cls, table, predicate):
         original = len(cls._data.get(table, []))
-        cls._data[table] = [record for record in cls._data.get(table, []) if not predicate(record)]
+        cls._data[table] = [
+            record for record in cls._data.get(table, []) if not predicate(record)
+        ]
         return original - len(cls._data[table])
-    
+
 
 # Example usage:
 # To get all records from a table:
@@ -65,3 +68,8 @@ class MockDatabase:
 #     "event_additional_notes": str,
 #     "accepted": bool
 #     }
+# calender_table = {
+#     "send_id": int,
+#     "accept_id": int,
+#     "event_id": int,
+# }
