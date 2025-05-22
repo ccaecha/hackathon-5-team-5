@@ -17,26 +17,36 @@
     {% block head %}{% endblock %}
 </head>
 
-<body>
+<body class="min-h-screen flex flex-col">
     <!-- Navigation (optional) -->
     {% block navbar %}
     <div class="navbar bg-base-100">
         <div class="flex-1">
-            <!-- <a class="btn btn-ghost text-xl">Flask App</a> -->
+            <a class="btn btn-ghost text-xl" href="/">Flask App</a>
         </div>
         <div class="flex-none">
-            <ul class="menu menu-horizontal px-1">
+            <ul class="menu menu-horizontal px-1 dropdown-end">
                 <li><a href="/">Home</a></li>
                 <!-- <li><a href="/about">About</a></li> -->
                 <li><a href="/dashboard">Dashboard</a></li>
                 <li><a href="/calendar">Your Time Slots</a></li>
+                <li tabindex="0" class="dropdown dropdown-end">
+                    <details>
+                        <summary>{{ session['user'] if session.get('user') else 'Test Users' }}</summary>
+                        <ul class="p-2 bg-base-200 rounded-box w-52 right-0 absolute">
+                            <li><a href="{{ url_for('main.set_user', username='Alice') }}">Alice</a></li>
+                            <li><a href="{{ url_for('main.set_user', username='Bob') }}">Bob</a></li>
+                            <li><a href="{{ url_for('main.set_user', username='Claire') }}">Claire</a></li>
+                        </ul>
+                    </details>
+                </li>
             </ul>
         </div>
     </div>
     {% endblock %}
 
     <!-- Main content area -->
-    <main class="container mx-auto px-4 py-8">
+    <main class="container mx-auto px-4 py-8 flex-grow">
         {% block content %}{% endblock %}
     </main>
 
@@ -50,7 +60,7 @@
     {% endblock %}
 
     <!-- Your custom JS -->
-    <script src="{{ url_for('static', filename='script.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 
     <!-- Additional scripts -->
     {% block scripts %}{% endblock %}

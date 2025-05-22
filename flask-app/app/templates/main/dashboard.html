@@ -17,51 +17,6 @@
                 </tr>
             </thead>
             <tbody>
-                <!-- Example rows, replace with Jinja loop in real app -->
-                <tr>
-                    <td>
-                        <div class="flex items-center gap-3">
-                            <div class="avatar">
-                                <div class="w-12 rounded-full">
-                                    <img src="https://api.dicebear.com/7.x/miniavs/svg?seed=User1" alt="User1" />
-                                </div>
-                            </div>
-                            <div>
-                                <div class="font-bold">Alice</div>
-                                <div class="text-sm opacity-50">alice@email.com</div>
-                            </div>
-                        </div>
-                    </td>
-                    <td>Today, 2:00 PM - 4:00 PM</td>
-                    <td>Library</td>
-                    <td>Math Tutoring</td>
-                    <td>
-                        <button class="btn btn-success btn-sm">Accept</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="flex items-center gap-3">
-                            <div class="avatar">
-                                <div class="w-12 rounded-full">
-                                    <img src="https://api.dicebear.com/7.x/miniavs/svg?seed=User2" alt="User2" />
-                                </div>
-                            </div>
-                            <div>
-                                <div class="font-bold">Bob</div>
-                                <div class="text-sm opacity-50">bob@email.com</div>
-                            </div>
-                        </div>
-                    </td>
-                    <td>Tomorrow, 10:00 AM - 12:00 PM</td>
-                    <td>Coffee Shop</td>
-                    <td>Dog Walking</td>
-                    <td>
-                        <button class="btn btn-success btn-sm">Accept</button>
-                    </td>
-                </tr>
-                <!-- End example rows -->
-                {# In production, use:
                 {% for slot in slots %}
                 <tr>
                     <td>
@@ -85,7 +40,6 @@
                     </td>
                 </tr>
                 {% endfor %}
-                #}
             </tbody>
         </table>
     </div>
