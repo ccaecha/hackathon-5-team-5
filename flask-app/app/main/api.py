@@ -37,7 +37,7 @@ def insert_event():
     }
     MockDatabase.insert("event", record)
     print(record)
-    return redirect(url_for("dashboard"))
+    return redirect(url_for("main.dashboard"))
 
 
 @blueprint.route("/event", methods=["GET"])
