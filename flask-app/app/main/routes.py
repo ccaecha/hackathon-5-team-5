@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, session, redirect, request
+from flask import Blueprint, render_template, session, redirect, request, url_for
 from flask import jsonify
 from ..db.db import MockDatabase
 
@@ -79,7 +79,7 @@ def dashboard():
                 }
             )
 
-    return render_template("main/dashboard.html", events=enriched_events)
+    return redirect(url_for("main.dashboard"))
 
 
 @main.route("/time-slot")
