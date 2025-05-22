@@ -1,21 +1,20 @@
 console.log("Hello from script.js");
 
-// Example usage: Accept an event with a button click
 $(".accept-btn").on("click", function () {
   const eventId = $(this).data("event-id");
-  const currentUserId = $(this).data("user-id"); // Set this in your template
+  const currentUserId = $(this).data("user-id");
 
   $.ajax({
-    url: `/api/event/${eventId}`, // Adjust if your blueprint uses a prefix
+    url: `/api/event/${eventId}`,
     type: "PUT",
     contentType: "application/json",
     data: JSON.stringify({
       accepted: true,
-      accepted_by: currentUserId, // Add this field if you want to track who accepted
+      accepted_by: currentUserId,
     }),
     success: function (response) {
       console.log("Event accepted!");
-      location.reload(); // Optionally reload to update UI
+      location.reload();
     },
     error: function (xhr) {
       console.log("Error: " + xhr.responseJSON.message);
