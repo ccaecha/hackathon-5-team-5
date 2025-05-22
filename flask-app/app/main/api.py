@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, session
+from flask import Blueprint, render_template, session, request, redirect, url_for
 from flask import jsonify
 from ..db.db import MockDatabase
 
@@ -23,10 +23,20 @@ def get_event(id):
 
 
 @blueprint.route("/event", methods=["POST"])
-def insert_event(record):
+def insert_event():
+    record = {
+        "user_id": request.form.get("user_id"),
+        "event_title": request.form.get("event_title"),
+        "event_description": request.form.get("event_description"),
+        "start_time": request.form.get("start_time"),
+        "end_time": request.form.get("end_time"),
+        "event_location": request.form.get("event_location"),
+        "event_additional_notes": request.form.get("event_additional_notes"),
+        "accepted": False,
+    }
     MockDatabase.insert("event", record)
-    return jsonify({"status": "success", "message": "Event inserted successfully"})
-
+    print(record)
+    return redirect(url_for("dashboard"))
 
 @blueprint.route("/event", methods=["PUT"])
 def update_event(id, record):
