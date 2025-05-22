@@ -39,7 +39,7 @@ def insert_event():
         return jsonify({"status": "error", "message": str(e)}), 400
 
 
-@blueprint.route("/event/<id>", methods=["PUT"])
+@blueprint.route("/event/<int:id>", methods=["PUT"])
 def update_event(id):
     record = request.get_json()
     updated_count = MockDatabase.update(

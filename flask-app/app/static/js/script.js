@@ -14,7 +14,7 @@ $(".accept-btn").on("click", function () {
     }),
     success: function (response) {
       console.log("Event accepted!");
-      location.reload();
+      //   location.reload();
     },
     error: function (xhr) {
       console.log("Error: " + xhr.responseJSON.message);
