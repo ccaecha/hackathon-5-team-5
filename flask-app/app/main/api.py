@@ -61,7 +61,6 @@ def update_event(id):
     updated_count = MockDatabase.update(
         "event", lambda x: x["id"] == id, lambda x: {**x, **record}
     )
-    print(MockDatabase.find("event", lambda x: x["id"] == id))
     return jsonify(
         {
             "status": "success",
