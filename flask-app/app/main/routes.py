@@ -26,3 +26,7 @@ def db_test():
     MockDatabase.get_all("test_table")
     data = MockDatabase.get_all("test_table")
     return jsonify(data)
+
+@main.route("/calendar")
+def calendar():
+    return render_template("main/calendar.html")
