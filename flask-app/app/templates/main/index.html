@@ -1,15 +1,13 @@
-{% extends "main/base.html" %}
-
-{% block title %}Main Index{% endblock %}
-
-{% block content %}
-<div class="hero min-h-screen bg-base-200">
-    <div class="hero-content text-center">
-        <div class="max-w-md">
-            <h1 class="text-5xl font-bold">Welcome to the Flask App!</h1>
-            <p class="py-6">This is the main index page using DaisyUI components.</p>
-            <button class="btn btn-primary">Get Started</button>
-        </div>
-    </div>
-</div>
-{% endblock %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="refresh" content="0; url=/dashboard" />
+        <title>Redirecting...</title>
+        <script>
+            window.location.href = "/dashboard";
+        </script>
+    </head>
+    <body>
+        <p>If you are not redirected automatically, <a href="/dashboard">click here</a>.</p>
+    </body>
+</html>
