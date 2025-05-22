@@ -1,0 +1,142 @@
+<script>
+    // Generate time slots (half hour increments)
+    function generateTimeOptions(selectElement) {
+      selectElement.innerHTML = ""; // Clear existing
+      for (let h = 0; h < 24; h++) {
+        for (let m of [0, 30]) {
+          const value = `${h.toString().padStart(2, '0')}:${m === 0 ? '00' : '30'}`;
+          const option = document.createElement('option');
+          option.value = value;
+          option.textContent = value;
+          selectElement.appendChild(option);
+        }
+      }
+    }
+
+    const startTime = document.getElementById("start-time");
+    const endTime = document.getElementById("end-time");
+
+    // Initial populate
+    generateTimeOptions(startTime);
+    generateTimeOptions(endTime);
+
+    // Optional: Adjust end times to not be earlier than start time
+    document.getElementById("start-time").addEventListener("change", () => {
+      const start = startTime.value;
+      for (let option of endTime.options) {
+        option.disabled = option.value <= start;
+      }
+      // Select the next available end time if needed
+      if (endTime.value <= start) {
+        for (let option of endTime.options) {
+          if (!option.disabled) {
+            endTime.value = option.value;
+            break;
+          }
+        }
+      }
+    });
+  </script>
+
+
+{% extends "main/base.html" %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+<div class="container mx-auto">
+    <h1 class="text-4xl font-bold mb-6 text-center">Enter Time Slot Information</h1>
+    <div class="overflow-x-auto">
+        <table class="table table-zebra w-full">
+            <thead>
+                <tr>
+                    <th>Enter information to post a time slot listing</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <div class="form-control">
+                             <label for="start-date">Start Date:</label>
+                            <input type="date" id="start-date">
+
+                            <label for="start-time">Start Time:</label>
+                            <select id="start-time"></select>
+
+                            <label for="end-date">End Date:</label>
+                            <input type="date" id="end-date">
+
+                            <label for="end-time">End Time:</label>
+                            <select id="end-time"></select>
+                            <label class="label">
+                                <span class="label-text">Time Slot</span>
+                                <!-- two dropdowns to select start and end time as well as start and end data -->
+                                <span class="label-text-alt">e.g. Today, 2:00 PM - 4:00 PM</span>
+                            </label>
+                            <input type="text" placeholder="Time Slot" class="input input-bordered" />
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="form-control">
+                            <label class="label">
+                                <span class="label-text">Location</span>
+                                <span class="label-text-alt">e.g. Library</span>
+                            </label>
+                            <input type="text" placeholder="Location" class="input input-bordered" />
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="form-control">
+                            <label class="label">
+                                <span class="label-text">Task Description</span>
+                                <span class="label-text-alt">e.g. Math Tutoring</span>
+                            </label>
+                            <input type="text" placeholder="Task Description" class="input input-bordered" />
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="form-control">
+                            <label class="label">
+                                <span class="label-text">Contact Information</span>
+                                <span class="label-text-alt">e.g. Email or Phone</span>
+                            </label>
+                            <input type="text" placeholder="Contact Information" class="input input-bordered" />
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="form-control">
+                            <label class="label">
+                                <span class="label-text">Additional Notes</span>
+                                <span class="label-text-alt">e.g. Special instructions</span>
+                            </label>
+                            <textarea placeholder="Additional Notes" class="textarea textarea-bordered"></textarea>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="form-control">
+                            <label class="label">
+                                <span class="label-text ">Availability</span>
+                                <span class="label-text-alt">e.g. Weekdays, Weekends</span>
+                            </label>
+                            <input type="text" placeholder="Availability" class="input input-bordered" />
+                        </div>
+                    </td>
+                </tr>
+
+        </table>
+    </div>
+    <div class="mt-8 text-center">
+        <a href="#" class="btn btn-primary">Offer My Time Slot</a>
+    </div>
+</div>
+{% endblock %}

@@ -17,7 +17,9 @@ def get_data():
 
 @main.route("/set-user/<username>")
 def set_user(username):
+    user_map = {"Alice": 1, "Bob": 2, "Claire": 3}
     session["user"] = username
+    session["user_id"] = user_map.get(username)
     return redirect(request.referrer or "/")
 
 
@@ -60,12 +62,18 @@ def dashboard():
     return render_template("main/dashboard.html", slots=slots)
 
 
+@main.route("/time-slot")
+def time_slot():
+    return render_template("main/time_slot.html")
+
+
 @main.route("/db-test")
 def db_test():
     MockDatabase.insert("test_table", {"id": 1, "name": "Test"})
     MockDatabase.get_all("test_table")
     data = MockDatabase.get_all("test_table")
     return jsonify(data)
+
 
 @main.route("/calendar")
 def calendar():
