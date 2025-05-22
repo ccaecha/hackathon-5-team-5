@@ -17,7 +17,7 @@
     {% block head %}{% endblock %}
 </head>
 
-<body>
+<body class="min-h-screen flex flex-col">
     <!-- Navigation (optional) -->
     {% block navbar %}
     <div class="navbar bg-base-100">
@@ -45,7 +45,7 @@
     {% endblock %}
 
     <!-- Main content area -->
-    <main class="container mx-auto px-4 py-8">
+    <main class="container mx-auto px-4 py-8 flex-grow">
         {% block content %}{% endblock %}
     </main>
 
