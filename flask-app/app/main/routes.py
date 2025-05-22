@@ -2,6 +2,36 @@ from flask import Blueprint, render_template, session, redirect, request
 from flask import jsonify
 from ..db.db import MockDatabase
 
+import random
+
+RANDOM_NAMES = [
+    "Alex",
+    "Jamie",
+    "Taylor",
+    "Jordan",
+    "Casey",
+    "Riley",
+    "Morgan",
+    "Avery",
+    "Quinn",
+    "Sage",
+    "River",
+    "Phoenix",
+    "Rowan",
+    "Skylar",
+    "Cameron",
+    "Dakota",
+    "Emery",
+    "Finley",
+    "Hayden",
+    "Indigo",
+    "Justice",
+    "Kendall",
+    "Logan",
+    "Marley",
+]
+
+
 main = Blueprint("main", __name__)
 
 
@@ -25,41 +55,31 @@ def set_user(username):
 
 @main.route("/dashboard")
 def dashboard():
-    current_user = session.get("user", "Alice")
-    slots = [
-        {
-            "user_name": "Alice",
-            "email": "alice@email.com",
-            "avatar_url": "https://api.dicebear.com/7.x/miniavs/svg?seed=User1",
-            "time": "Today, 2:00 PM - 4:00 PM",
-            "location": "Library",
-            "task": "Math Tutoring",
-        },
-        {
-            "user_name": "Bob",
-            "email": "bob@email.com",
-            "avatar_url": "https://api.dicebear.com/7.x/miniavs/svg?seed=User2",
-            "time": "Tomorrow, 10:00 AM - 12:00 PM",
-            "location": "Coffee Shop",
-            "task": "Dog Walking",
-        },
-        {
-            "user_name": "Claire",
-            "email": "claire@email.com",
-            "avatar_url": "https://api.dicebear.com/7.x/miniavs/svg?seed=User3",
-            "time": "Tomorrow, 10:00 AM - 12:00 PM",
-            "location": "Home",
-            "task": "Cat Sitting",
-        },
-    ]
+    current_user_id = session.get("user_id", 1)
+    events = MockDatabase.get_all("event")
+    users = MockDatabase.get_all("user")
+    user_map = {user["id"]: user for user in users}
 
-    filtered_slots = [
-        slot for slot in slots if slot["user_name"].lower() != current_user.lower()
-    ]
-    slots = filtered_slots
-    # In production, you would fetch from the database:
-    # slots = MockDatabase.get_all("slots")
-    return render_template("main/dashboard.html", slots=slots)
+    # Attach user info to each event
+    enriched_events = []
+    for event in events:
+        if event["user_id"] != current_user_id:
+            user = user_map.get(event["user_id"], {})
+            username = user.get("username", random.choice(RANDOM_NAMES))
+            email = user.get("email", f"{username.lower()}@example.com")
+            enriched_events.append(
+                {
+                    **event,
+                    "username": username,
+                    "email": email,
+                    "avatar_url": event.get(
+                        "avatar_url",
+                        "https://api.dicebear.com/7.x/miniavs/svg?seed=User",
+                    ),
+                }
+            )
+
+    return render_template("main/dashboard.html", events=enriched_events)
 
 
 @main.route("/time-slot")
