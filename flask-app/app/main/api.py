@@ -48,18 +48,20 @@ def insert_event():
     print(record)
     return redirect(url_for("main.dashboard"))
 
+
 @blueprint.route("/event", methods=["GET"])
 def get_all_events():
     data = MockDatabase.get_all("event")
     return jsonify({"status": "success", "data": data})
 
 
-@blueprint.route("/event/<id>", methods=["PUT"])
+@blueprint.route("/event/<int:id>", methods=["PUT"])
 def update_event(id):
     record = request.get_json()
     updated_count = MockDatabase.update(
         "event", lambda x: x["id"] == id, lambda x: {**x, **record}
     )
+    print(MockDatabase.find("event", lambda x: x["id"] == id))
     return jsonify(
         {
             "status": "success",
