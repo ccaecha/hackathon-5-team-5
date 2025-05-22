@@ -100,4 +100,35 @@ def db_test():
 
 @main.route("/calendar")
 def calendar():
-    return render_template("main/calendar.html")
+    current_user_id = session.get("user_id", 1)
+    calendar_entries = MockDatabase.get_all("calendar")
+    events = MockDatabase.get_all("event")
+    users = MockDatabase.get_all("user")
+    user_map = {user["id"]: user for user in users}
+    event_map = {event["id"]: event for event in events}
+
+    # Filter calendar entries for current user and enrich with event/user info
+    enriched_calendar = []
+    for entry in calendar_entries:
+        if entry["accept_id"] == current_user_id:
+            event = event_map.get(entry["event_id"])
+            if event:
+                owner = user_map.get(event["user_id"], {})
+                enriched_calendar.append(
+                    {
+                        "event_title": event.get("event_title"),
+                        "event_description": event.get("event_description"),
+                        "start_time": event.get("start_time"),
+                        "end_time": event.get("end_time"),
+                        "event_location": event.get("event_location"),
+                        "event_additional_notes": event.get("event_additional_notes"),
+                        "owner_name": owner.get("username", "Unknown"),
+                        "owner_email": owner.get("email", ""),
+                        "avatar_url": owner.get(
+                            "avatar_url",
+                            "https://api.dicebear.com/7.x/miniavs/svg?seed=User",
+                        ),
+                    }
+                )
+
+    return render_template("main/calendar.html", calendar=enriched_calendar)
